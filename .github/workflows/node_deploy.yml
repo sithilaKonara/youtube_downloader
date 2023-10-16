@@ -27,11 +27,12 @@ jobs:
         pwd
 
     - name: Set up Node.js ${{ matrix.node-version }}
-      run: pwd
-    #   uses: actions/setup-node@v3
-    #   with:
-    #     node-version: ${{ matrix.node-version }}
-    #     cache: 'npm'
+      uses: actions/setup-node@v3
+      with:
+        working-directory: web
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
 
     # - name: Install dependencies
     #   run: |
