@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -24,15 +24,14 @@ jobs:
         cache: 'npm'
 
 
-    # - name: Install dependencies
-    #   run: |
-    #     cd web
-    #     npm install
+    - name: Install dependencies
+      run: npm install
     
-    # - name: Build React app
-    #   run: |
-    #     cd web
-    #     npm run build    
+    - name: Build React app
+      run: |
+        ls -al   
+        npm run build
+        ls -al    
     
     # - name: Deploy to AWS S3
     #   env:
