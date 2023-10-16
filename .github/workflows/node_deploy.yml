@@ -15,7 +15,7 @@ jobs:
 
     steps:
     - name: Access Web project directory
-      run: cd web
+      run: cd /home/runner/work/youtube_downloader/youtube_downloader/web
     
     - name: install AWS CLI
       run: apt-get install awscli
