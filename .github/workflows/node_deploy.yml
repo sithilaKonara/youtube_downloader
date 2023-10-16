@@ -16,6 +16,9 @@ jobs:
     steps:
     - name: Access Web project directory
       run: cd web
+    
+    - name: install AWS CLI
+      run: apt-get install awscli
 
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
