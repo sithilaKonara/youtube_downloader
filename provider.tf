@@ -14,7 +14,7 @@ terraform {
 }
 
 provider "aws" {
-  region = var.v_aws_region
+  region = "us-east-1"
   default_tags {
     tags = {
       envionment = "test"
