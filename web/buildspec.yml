@@ -1,0 +1,33 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+  pre_build:
+    commands:
+      - cd web
+      # install yarn
+      - npm install yarn
+      # install bootstrap
+      - npm i bootstrap@5.3.2
+      # install dependencies
+      - yarn install
+      # so that build commands work
+      - yarn add eslint-config-react-app
+
+  build:
+    commands:
+      # run build script
+      - yarn build
+  
+  post_build:
+    commands:
+      - aws s3 sync build/ s3://your-s3-bucket-name  # Deploy the built app to an S3 bucket
+
+artifacts:
+  # include all files required to run application
+  # we include only the static build files
+  files:
+    - '**/*'
+  base-directory: 'build'  
