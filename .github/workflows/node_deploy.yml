@@ -33,7 +33,8 @@ jobs:
     
     - name: Deploy to AWS S3
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.YOUR_AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.YOUR_AWS_SECRET_ACCESS_KEY }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
+        aws s3 ls
         aws s3 sync web/dist/ s3://youtube-downloader-web
