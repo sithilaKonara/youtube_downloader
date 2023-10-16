@@ -24,6 +24,7 @@ jobs:
         pwd
         ls -al
         cd web
+        pwd
 
     - name: Set up Node.js ${{ matrix.node-version }}
       run: pwd
