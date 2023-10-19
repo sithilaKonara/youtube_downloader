@@ -1,4 +1,5 @@
 from pytube import YouTube
+import boto3
 
 # URL of the YouTube video you want to download
 
@@ -24,7 +25,7 @@ def get_ytd_object(video_url):
         } 
         return response
 
-def download_ytd_object(video_url,itag):
+def download_ytd_object(video_url,itag, s3_bkt):
 
     # Create a YouTube object
     yt = YouTube(video_url)
@@ -33,19 +34,16 @@ def download_ytd_object(video_url,itag):
     video_stream = yt.streams.get_by_itag(itag)
 
     # download video
-    video_stream.download()
+    video_stream.download(output_path="/tmp/")
 
- 
+    # Extract the original file name (without file extension)
+    original_file_name = re.sub(r'[^\w\s.-]', '', yt.title)
+
+    # Initialize an S3 client
+    s3 = boto3.client('s3')
+
+    # Upload the downloaded video to the specified S3 bucket
+    s3.upload_file(f"/tmp/{video_stream.default_filename}", s3_bkt, "video", )
 
 
 
-
-# video_url = "https://www.youtube.com/watch?v=fA2XtiZdDkE"
-# download_ytd_object(video_url, 18)
-
-
-#     # Specify the download location (change this to your desired location)
-# download_path = "/path/to/your/download/folder/"
-
-# # Download the video
-# video_stream.download(output_path=download_path)
