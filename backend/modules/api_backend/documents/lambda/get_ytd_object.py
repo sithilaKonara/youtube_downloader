@@ -9,11 +9,20 @@ def get_ytd_object(event, context):
         # Get the highest resolution stream
         video_stream = yt.streams.filter(file_extension='mp4', progressive=True)
 
-        return {
+        video_info = {
+            'title': yt.title,
+            'thumbnail_url': yt.thumbnail_url,
+            'resolutions': {
+                'video/mp4': list(set(stream.resolution for stream in yt.streams.filter(file_extension='mp4') if stream.resolution is not None)),
+            }
+        }
+        response = {
             'statusCode': 200,
             'success': True,
-            'result': video_stream
+            'result': video_info
         }
+
+        return response
     
     except Exception as e:
         return {
