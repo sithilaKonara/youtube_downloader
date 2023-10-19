@@ -1,6 +1,6 @@
 data "archive_file" "d_pytube_layer" {
   type        = "zip"
-  source_file = "${path.root}ssm_hybrid_activation.py"
+  source_file = "${path.root}/modules/api_backend/documents/lambda/pytube/venv/Lib/site-packages"
   output_path = "layer.zip"
 }
 
