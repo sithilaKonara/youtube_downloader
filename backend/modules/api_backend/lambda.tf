@@ -28,7 +28,7 @@ resource "aws_lambda_function" "r_get_ytd_object" {
   handler       = "get_ytd_object.get_ytd_object"
   timeout = 900
   source_code_hash = data.archive_file.d_get_ytd_object.output_base64sha256
-
+  layers = [aws_lambda_layer_version.r_pytube_layer.arn]
   runtime = "python3.11"
 
   environment {
