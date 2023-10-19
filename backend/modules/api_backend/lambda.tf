@@ -22,7 +22,7 @@ data "archive_file" "d_get_ytd_object" {
 # Create get_ytd_object lambda
 resource "aws_lambda_function" "r_get_ytd_object" {
 
-  filename      = "${path.root}/modules/api_backend/documents/get_ytd_object.zip"
+  filename      = "${path.root}/modules/api_backend/documents/lambda/get_ytd_object.zip"
   function_name = "get_ytd_object"
   role          = aws_iam_role.r_role_get_ytd_object.arn
   handler       = "get_ytd_object.get_ytd_object"
