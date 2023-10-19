@@ -16,7 +16,7 @@ resource "aws_lambda_layer_version" "r_pytube_layer" {
 data "archive_file" "d_get_ytd_object" {
   type        = "zip"
   source_file = "${path.root}/modules/api_backend/documents/lambda/get_ytd_object.py"
-  output_path = "${path.root}/modules/api_backend/documents/get_ytd_object.zip"
+  output_path = "${path.root}/modules/api_backend/documents/lambda/get_ytd_object.zip"
 }
 
 # Create get_ytd_object lambda
