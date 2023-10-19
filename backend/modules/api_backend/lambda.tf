@@ -26,7 +26,7 @@ resource "aws_lambda_function" "r_get_ytd_object" {
   function_name = "get_ytd_object"
   role          = aws_iam_role.r_role_get_ytd_object.arn
   handler       = "get_ytd_object.get_ytd_object"
-
+  timeout = 900
   source_code_hash = data.archive_file.d_get_ytd_object.output_base64sha256
 
   runtime = "python3.11"
