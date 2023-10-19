@@ -29,7 +29,7 @@ resource "aws_lambda_function" "r_get_ytd_object" {
 
   source_code_hash = data.archive_file.d_get_ytd_object.output_base64sha256
 
-  runtime = "python 3.11"
+  runtime = "python3.11"
 
   environment {
     variables = {
