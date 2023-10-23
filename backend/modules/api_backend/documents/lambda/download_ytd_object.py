@@ -23,7 +23,7 @@ def download_ytd_object(event, context):
         # download video
         video_stream.download(output_path=download_dir, filename=video_file_name)
 
-        s3_bucket_name = 'your-s3-bucket-name'
+        s3_bucket_name = 'youtube-downloader-web'
         s3_folder_name = 'video/'
         
         # Upload the video to S3

@@ -8,7 +8,7 @@ def get_ytd_object(event, context):
 
         # Get the highest resolution stream
         video_stream = yt.streams.filter(file_extension='mp4', progressive=True)
-
+        print(video_stream)
         video_info = {
             'title': yt.title,
             'thumbnail_url': yt.thumbnail_url,

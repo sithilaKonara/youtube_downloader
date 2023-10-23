@@ -28,6 +28,11 @@ data "aws_iam_policy_document" "d_download_ytd_object" {
     ]
     resources = ["arn:aws:logs:${var.v_backend_region_id}:${var.v_backend_account_id}:log-group:/aws/lambda/download_ytd_object:*"]
   }
+   statement {
+    effect = "Allow"
+    actions = ["s3:PutObject"]
+    resources = ["arn:aws:s3:::youtube-downloader-web/video/*"]
+  }
 }
 
 
