@@ -100,7 +100,7 @@ resource "aws_cloudfront_distribution" "r_ytd_web_cf" {
   restrictions {
     geo_restriction {
       restriction_type = "whitelist"
-      locations        = "none"
+      locations        = []
     }
   }
 
