@@ -15,8 +15,8 @@ def get_ytd_object(event, context):
         video_info = {
             'title': yt.title,
             'thumbnail_url': yt.thumbnail_url,
-            'resolutions': {
-                'video/mp4': [{stream.resolution: stream.itag for stream in yt.streams.filter(file_extension='mp4') if stream.resolution is not None}]
+            'video/mp4': {
+                stream.resolution: stream.itag for stream in yt.streams.filter(file_extension='mp4') if stream.resolution is not None
             }
         }
         response = {
