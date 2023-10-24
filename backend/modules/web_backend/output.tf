@@ -3,5 +3,5 @@ output "o_cloudfront_distribution_url" {
 }
 
 output "o_s3_bkt_name" {
-  value = aws_cloudfront_distribution.r_ytd_web_cf.domain_name
+  value = aws_s3_bucket.r_ytd_web_s3.id
 }

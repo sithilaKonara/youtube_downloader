@@ -37,7 +37,7 @@ def download_ytd_object(event, context):
         
         os.remove(video_path)
 
-        download_link ={"download_link" : f"{cloud_front}/{s3_bucket_name}/{s3_key}"}
+        download_link ={"download_link" : f"https://{cloud_front}/{s3_bucket_name}/{s3_key}"}
 
         response = {
             'statusCode': 200,
