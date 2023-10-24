@@ -31,7 +31,7 @@ data "aws_iam_policy_document" "d_download_ytd_object" {
    statement {
     effect = "Allow"
     actions = ["s3:PutObject"]
-    resources = ["arn:aws:s3:::youtube-downloader-web/video/*"]
+    resources = ["arn:aws:s3:::${var.v_backend_s3_bkt_name}/video/*"]
   }
 }
 

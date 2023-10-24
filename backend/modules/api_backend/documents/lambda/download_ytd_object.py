@@ -51,5 +51,5 @@ def download_ytd_object(event, context):
         return {
             'statusCode': 500,
             'success': False,
-            'description': f"Error:: get_ytd_object:: {e}"
+            'description': f"Error:: download_ytd_object:: {e}"
         }
