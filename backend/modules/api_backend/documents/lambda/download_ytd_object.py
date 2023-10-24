@@ -1,6 +1,7 @@
 from pytube import YouTube
 import boto3
 import os
+import json
 
 def download_ytd_object(event, context):
 
@@ -11,8 +12,8 @@ def download_ytd_object(event, context):
 
 
     try:
-        video_url = event['url']
-        itag = event['itag']
+        video_url = event['queryStringParameters']['url']
+        itag = event['queryStringParameters']['itag']
 
         # Create a YouTube object        
         yt = YouTube(video_url)
@@ -40,16 +41,21 @@ def download_ytd_object(event, context):
         download_link ={"download_link" : f"https://{cloud_front}/{s3_bucket_name}/{s3_key}"}
 
         response = {
-            'statusCode': 200,
             'success': True,
             'result': download_link
         }
-        return response
+        return {
+            'statusCode': 200,
+            'body': json.dumps(response)
+        }
 
     except Exception as e:
 
-        return {
-            'statusCode': 500,
+        response = {
             'success': False,
             'description': f"Error:: download_ytd_object:: {e}"
+        }    
+        return {
+            'statusCode': 200,
+            'body': json.dumps(response)
         }

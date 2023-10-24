@@ -1,9 +1,11 @@
 from pytube import YouTube
+import json
 
 def get_ytd_object(event, context):
-    # Create a YouTube object
+
     try:
-        video_url = event['url']
+        video_url = event['queryStringParameters']['url']
+        # Create a YouTube object
         yt = YouTube(video_url)
 
         # Get the highest resolution stream
@@ -17,16 +19,21 @@ def get_ytd_object(event, context):
             }
         }
         response = {
-            'statusCode': 200,
             'success': True,
             'result': video_info
         }
 
-        return response
+        return {
+            'statusCode': 200,
+            'body': json.dumps(response)
+        }
     
     except Exception as e:
-        return {
-            'statusCode': 500,
+        response = {
             'success': False,
             'description': f"Error:: get_ytd_object:: {e}"
+        }
+        return {
+            'statusCode': 500,
+            'body': json.dumps(response)
         }
