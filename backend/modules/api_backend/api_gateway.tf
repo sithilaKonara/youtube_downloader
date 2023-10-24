@@ -60,7 +60,7 @@ resource "aws_api_gateway_integration" "r_options_mock" {
   }
 }
 
-resource "aws_api_gateway_method_response" "options" {
+resource "aws_api_gateway_method_response" "r_options_response" {
   rest_api_id = aws_api_gateway_rest_api.r_ytd_api_gateway.id
   resource_id = aws_api_gateway_resource.r_ytd_root.id
   http_method = aws_api_gateway_method.r_options.http_method
@@ -75,7 +75,7 @@ resource "aws_api_gateway_method_response" "options" {
   }
 }
 
-resource "aws_api_gateway_integration_response" "options" {
+resource "aws_api_gateway_integration_response" "r_options_integration_response" {
   rest_api_id = aws_api_gateway_rest_api.r_ytd_api_gateway.id
   resource_id = aws_api_gateway_resource.r_ytd_root.id
   http_method = aws_api_gateway_integration.r_options.http_method
