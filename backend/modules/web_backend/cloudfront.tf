@@ -23,12 +23,6 @@ resource "aws_cloudfront_distribution" "r_ytd_web_cf" {
   comment             = "Some comment"
   default_root_object = "index.html"
 
-  logging_config {
-    include_cookies = false
-    bucket          = "mylogs.s3.amazonaws.com"
-    prefix          = "myprefix"
-  }
-
 #   aliases = ["mysite.example.com", "yoursite.example.com"]
 
   default_cache_behavior {
@@ -45,7 +39,7 @@ resource "aws_cloudfront_distribution" "r_ytd_web_cf" {
     }
 
     viewer_protocol_policy = "allow-all"
-    min_ttl                = 0
+    min_ttl                = 1
     default_ttl            = 3600
     max_ttl                = 86400
   }
@@ -105,7 +99,7 @@ resource "aws_cloudfront_distribution" "r_ytd_web_cf" {
   }
 
   tags = {
-    Environment = "production"
+    Environment = "test"
   }
 
   viewer_certificate {
