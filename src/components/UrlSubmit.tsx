@@ -13,7 +13,7 @@ function UrlSubmit(props: any) {
 
     const handleSubmit = async () => {
         try{                        
-            const response = await fetch('https://q7q9rbu94k.execute-api.eu-north-1.amazonaws.com/dev/url', {
+            const response = await fetch('https://ia29poyu60.execute-api.us-east-1.amazonaws.com/test/ytd/ytd_get', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
