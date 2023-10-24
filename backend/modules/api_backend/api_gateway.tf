@@ -135,6 +135,23 @@ resource "aws_api_gateway_stage" "r_api_gw_stage" {
   deployment_id = aws_api_gateway_deployment.r_ytd_api_gw_deployment.id
 }
 
+
+resource "aws_lambda_permission" "r_api_gateway_get" {
+  statement_id  = "AllowExecutionFromAPIGatewayGet"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.r_get_ytd_object.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_api_gateway_deployment.r_ytd_api_gw_deployment.execution_arn}/*/get_ytd_object"
+}
+
+resource "aws_lambda_permission" "r_api_gateway_post" {
+  statement_id  = "AllowExecutionFromAPIGatewayPost"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.r_download_ytd_object.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_api_gateway_deployment.r_ytd_api_gw_deployment.execution_arn}/*/download_ytd_object"
+}
+
 output "o_api_gateway_url" {
   value = aws_api_gateway_deployment.r_ytd_api_gw_deployment.invoke_url
 }
