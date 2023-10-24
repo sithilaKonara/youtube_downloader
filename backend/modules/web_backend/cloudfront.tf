@@ -18,7 +18,6 @@ resource "aws_cloudfront_distribution" "r_ytd_web_cf" {
     origin_id                = local.s3_origin_id
   }
 
-  staging             = true
   enabled             = true
   is_ipv6_enabled     = true
   comment             = "Testing CloudFront destribution"
