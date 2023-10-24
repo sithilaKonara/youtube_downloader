@@ -1,7 +1,15 @@
 from pytube import YouTube
 import boto3
 import os
+
 def download_ytd_object(event, context):
+
+    cloud_front = os.environ['CLOUD_FRONT']
+    download_dir = os.environ['DOWNLOAD_DIR']
+    s3_bucket_name = os.environ['S3_BUCKET_NAME']
+    s3_folder_name = os.environ['S3_FOLDER_NAME']
+
+
     try:
         video_url = event['url']
         itag = event['itag']
@@ -14,7 +22,6 @@ def download_ytd_object(event, context):
         video_file_name = f'{video_id}.mp4'
 
         # Create a temporary directory to store the downloaded video
-        download_dir = '/tmp'
         video_path = os.path.join(download_dir, video_file_name)
 
         # Get the highest resolution stream
@@ -22,9 +29,6 @@ def download_ytd_object(event, context):
 
         # download video
         video_stream.download(output_path=download_dir, filename=video_file_name)
-
-        s3_bucket_name = 'youtube-downloader-web'
-        s3_folder_name = 'video/'
         
         # Upload the video to S3
         s3_client = boto3.client('s3')
@@ -33,7 +37,7 @@ def download_ytd_object(event, context):
         
         os.remove(video_path)
 
-        download_link ={"download_link" : f"https://s3.amazonaws.com/{s3_bucket_name}/{s3_key}"}
+        download_link ={"download_link" : f"{cloud_front}/{s3_bucket_name}/{s3_key}"}
 
         response = {
             'statusCode': 200,

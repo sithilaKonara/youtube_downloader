@@ -59,7 +59,10 @@ resource "aws_lambda_function" "r_download_ytd_object" {
 
   environment {
     variables = {
-      foo = "bar"
+      CLOUD_FRONT = "URL HERE"
+      DOWNLOAD_DIR = "/tmp"
+      S3_BUCKET_NAME = "BKTNAME"
+      S3_FOLDER_NAME = "videos/"
     }
   }
 }
