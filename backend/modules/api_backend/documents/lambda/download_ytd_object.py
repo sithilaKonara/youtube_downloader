@@ -12,8 +12,9 @@ def download_ytd_object(event, context):
 
 
     try:
-        video_url = event['queryStringParameters']['url']
-        itag = event['queryStringParameters']['itag']
+        body = json.loads(event['body'])
+        video_url = body['url']
+        itag = body['itag']
 
         # Create a YouTube object        
         yt = YouTube(video_url)
@@ -56,6 +57,6 @@ def download_ytd_object(event, context):
             'description': f"Error:: download_ytd_object:: {e}"
         }    
         return {
-            'statusCode': 200,
+            'statusCode': 500,
             'body': json.dumps(response)
         }

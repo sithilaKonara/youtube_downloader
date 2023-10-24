@@ -62,7 +62,7 @@ resource "aws_lambda_function" "r_download_ytd_object" {
       CLOUD_FRONT = "${var.v_backend_cloudfront_distribution_url}"
       DOWNLOAD_DIR = "/tmp"
       S3_BUCKET_NAME = "${var.v_backend_s3_bkt_name}"
-      S3_FOLDER_NAME = "videos/"
+      S3_FOLDER_NAME = "video/"
     }
   }
 }
