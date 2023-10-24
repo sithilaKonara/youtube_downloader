@@ -11,7 +11,7 @@ data "aws_iam_policy_document" "d_bucket_policy_document" {
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceArn"
-      values   = ["arn:aws:cloudfront::554353511998:distribution/55555555552"]
+      values   = ["arn:aws:cloudfront::554353511998:distribution/${aws_cloudfront_distribution.r_ytd_web_cf.id}"]
     }
   }
 }
