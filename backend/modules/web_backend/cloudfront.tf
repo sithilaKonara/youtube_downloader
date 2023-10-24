@@ -30,6 +30,8 @@ resource "aws_cloudfront_distribution" "r_ytd_web_cf" {
   default_cache_behavior {
     cache_policy_id  = "658327ea-f89d-4fab-a63d-7e88639e58f6"
     allowed_methods   = ["GET", "HEAD", "OPTIONS", "POST"]
+    cached_methods = ["GET", "HEAD"]
+    viewer_protocol_policy = "allow-all"
     target_origin_id = local.s3_origin_id
   }  
 
