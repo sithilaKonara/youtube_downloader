@@ -78,7 +78,7 @@ resource "aws_api_gateway_method_response" "r_options_response" {
 resource "aws_api_gateway_integration_response" "r_options_integration_response" {
   rest_api_id = aws_api_gateway_rest_api.r_ytd_api_gateway.id
   resource_id = aws_api_gateway_resource.r_ytd_root.id
-  http_method = aws_api_gateway_integration.r_options.http_method
+  http_method = aws_api_gateway_integration.r_options_response.http_method
   status_code = "200"
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
