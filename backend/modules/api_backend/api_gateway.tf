@@ -52,7 +52,7 @@ resource "aws_api_gateway_integration" "r_post_lambda" {
 resource "aws_api_gateway_integration" "r_options_mock" {
   rest_api_id          = aws_api_gateway_rest_api.r_ytd_api_gateway.id
   resource_id          = aws_api_gateway_resource.r_ytd_root.id
-  http_method          = "OPTIONS"
+  http_method          = aws_api_gateway_method.r_options.http_method
   type                 = "MOCK"
   passthrough_behavior = "WHEN_NO_MATCH"
   request_templates = {
@@ -133,22 +133,6 @@ resource "aws_api_gateway_stage" "r_api_gw_stage" {
   stage_name    = aws_api_gateway_deployment.r_ytd_api_gw_deployment.stage_name
   rest_api_id   = aws_api_gateway_rest_api.r_ytd_api_gateway.id
   deployment_id = aws_api_gateway_deployment.r_ytd_api_gw_deployment.id
-}
-
-resource "aws_lambda_permission" "r_api_gateway_get" {
-  statement_id  = "AllowExecutionFromAPIGatewayGet"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.r_get_ytd_object.function_name
-  principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_deployment.r_ytd_api_gw_deployment.execution_arn}/*/*"
-}
-
-resource "aws_lambda_permission" "r_api_gateway_post" {
-  statement_id  = "AllowExecutionFromAPIGatewayPost"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.r_download_ytd_object.function_name
-  principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_deployment.r_ytd_api_gw_deployment.execution_arn}/*/*"
 }
 
 output "o_api_gateway_url" {
