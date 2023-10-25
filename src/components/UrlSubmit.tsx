@@ -17,6 +17,7 @@ function UrlSubmit(props: any) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+
                 },
                 body: JSON.stringify({
                     "url": url
@@ -27,9 +28,10 @@ function UrlSubmit(props: any) {
                 throw new Error('Network response was not ok');
             }
 
-            // const data = await response.json();
-            setUrlData(await response.json());
-            
+            const data = await response.json();
+            console.log(data);
+            setUrlData(data);
+
             if (props.onSubmit) {
                 props.onSubmit(urlData);
             }

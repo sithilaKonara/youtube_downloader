@@ -12,9 +12,8 @@ def download_ytd_object(event, context):
 
 
     try:
-        body = json.loads(event['body'])
-        video_url = body['url']
-        itag = body['itag']
+        video_url = event['url']
+        itag = event['itag']
 
         # Create a YouTube object        
         yt = YouTube(video_url)

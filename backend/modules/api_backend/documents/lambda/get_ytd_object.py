@@ -4,8 +4,7 @@ import json
 def get_ytd_object(event, context):
 
     try:
-        body = json.loads(event['body'])
-        video_url = body['url']
+        video_url = event['url']
         # Create a YouTube object
         yt = YouTube(video_url)
 
