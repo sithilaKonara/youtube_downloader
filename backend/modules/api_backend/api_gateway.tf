@@ -110,6 +110,95 @@ resource "aws_api_gateway_integration_response" "r_download_ytd_integration_resp
 }
 
 
+# =======================================================
+
+resource "aws_api_gateway_method" "r_get_ytd_method_option" {
+  rest_api_id   = aws_api_gateway_rest_api.r_ytd_api_gateway.id
+  resource_id   = aws_api_gateway_resource.r_get_ytd.id
+  http_method   = "OPTIONS"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_method" "r_download_ytd_method_option" {
+  rest_api_id   = aws_api_gateway_rest_api.r_ytd_api_gateway.id
+  resource_id   = aws_api_gateway_resource.r_download_ytd.id
+  http_method   = "OPTIONS"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "r_get_ytd_option" {
+  rest_api_id = aws_api_gateway_rest_api.r_ytd_api_gateway.id
+  resource_id = aws_api_gateway_resource.r_get_ytd.id
+  http_method = aws_api_gateway_method.r_get_ytd_method_option.http_method
+  type        = "MOCK"
+  integration_http_method = "OPTIONS"
+}
+
+resource "aws_api_gateway_integration" "r_download_ytd_option" {
+  rest_api_id = aws_api_gateway_rest_api.r_ytd_api_gateway.id
+  resource_id = aws_api_gateway_resource.r_download_ytd.id
+  http_method = aws_api_gateway_method.r_download_ytd_method_option.http_method
+  type        = "MOCK"
+  integration_http_method = "OPTIONS"
+}
+
+resource "aws_api_gateway_method_response" "r_get_ytd_response_option" {
+  rest_api_id = aws_api_gateway_rest_api.r_ytd_api_gateway.id
+  resource_id = aws_api_gateway_resource.r_get_ytd.id
+  http_method = aws_api_gateway_method.r_get_ytd_method_option.http_method
+  status_code = "200"
+
+  response_parameters = {
+      "method.response.header.Access-Control-Allow-Headers"     = true,
+      "method.response.header.Access-Control-Allow-Methods"     = true,
+      "method.response.header.Access-Control-Allow-Origin"      = true,
+      "method.response.header.Access-Control-Allow-Credentials" = true
+    }
+}
+
+resource "aws_api_gateway_method_response" "r_download_ytd_response_option" {
+  rest_api_id = aws_api_gateway_rest_api.r_ytd_api_gateway.id
+  resource_id = aws_api_gateway_resource.r_download_ytd.id
+  http_method = aws_api_gateway_method.r_download_ytd_method_option.http_method
+  status_code = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers"     = true,
+    "method.response.header.Access-Control-Allow-Methods"     = true,
+    "method.response.header.Access-Control-Allow-Origin"      = true,
+    "method.response.header.Access-Control-Allow-Credentials" = true
+  }
+}
+
+resource "aws_api_gateway_integration_response" "r_get_ytd_integration_response_option" {
+  rest_api_id = aws_api_gateway_rest_api.r_ytd_api_gateway.id
+  resource_id = aws_api_gateway_resource.r_get_ytd.id
+  http_method = aws_api_gateway_method.r_get_ytd_method_option.http_method
+  status_code = aws_api_gateway_method_response.r_get_ytd_response_option.status_code
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers"     = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+    "method.response.header.Access-Control-Allow-Methods"     = "'GET,OPTIONS,POST,PUT'",
+    "method.response.header.Access-Control-Allow-Origin"      = "'*'",
+    "method.response.header.Access-Control-Allow-Credentials" = "'true'"
+  }
+}
+
+resource "aws_api_gateway_integration_response" "r_download_ytd_integration_response_option" {
+  rest_api_id = aws_api_gateway_rest_api.r_ytd_api_gateway.id
+  resource_id = aws_api_gateway_resource.r_download_ytd.id
+  http_method = aws_api_gateway_method.r_download_ytd_method_option.http_method
+  status_code = aws_api_gateway_method_response.r_download_ytd_response_option.status_code
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers"     = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+    "method.response.header.Access-Control-Allow-Methods"     = "'GET,OPTIONS,POST,PUT'",
+    "method.response.header.Access-Control-Allow-Origin"      = "'*'",
+    "method.response.header.Access-Control-Allow-Credentials" = "'true'"
+  }
+}
+
+
 
 
 
