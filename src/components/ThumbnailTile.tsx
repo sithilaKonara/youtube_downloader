@@ -67,7 +67,7 @@ function ThumbnailTile(props: any) {
     };
 
     const options = Object.entries(ytdata["video/mp4"]).map(([quality, value]) => (
-        <option key={value as string} value={value as string}>
+        <option key={value as number} value={value as number}>
           {quality}
         </option>
     ));
