@@ -17,8 +17,6 @@ function ThumbnailTile(props: any) {
             </form>
         );
     }
-
-
     console.log("DATA", ytdata);
     const handleOptionChange = (event: { 
         target: { value: SetStateAction<string>; }; 
@@ -52,11 +50,12 @@ function ThumbnailTile(props: any) {
                 }
 
                 let apiResponse = await response.json();
+                apiResponse = JSON.parse(apiResponse['body']);
                 console.log(apiResponse);
 
                 // Update the conversion link and button visibility based on the response
                 if (apiResponse.success) {
-                    setConversionLink(apiResponse.data.url);
+                    setConversionLink(apiResponse.result.download_link);
                 }
                 
             } catch (error) {
