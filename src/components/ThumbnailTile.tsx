@@ -36,7 +36,7 @@ function ThumbnailTile(props: any) {
 
             // Make a POST API call here
             try {
-                const response = await fetch('https://q7q9rbu94k.execute-api.eu-north-1.amazonaws.com/dev/url/download', {
+                const response = await fetch('https://ia29poyu60.execute-api.us-east-1.amazonaws.com/test/ytd/ytd_download', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -51,7 +51,8 @@ function ThumbnailTile(props: any) {
                     throw new Error('Network response was not ok');
                 }
 
-                const apiResponse = await response.json();
+                let apiResponse = await response.json();
+                console.log(apiResponse);
 
                 // Update the conversion link and button visibility based on the response
                 if (apiResponse.success) {
