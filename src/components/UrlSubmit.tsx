@@ -28,8 +28,9 @@ function UrlSubmit(props: any) {
                 throw new Error('Network response was not ok');
             }
 
-            const data = await response.json();
-            console.log(data);
+            let  data = await response.json();
+            data = JSON.parse(data['body']);
+       
             setUrlData(data);
 
             if (props.onSubmit) {

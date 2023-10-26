@@ -6,7 +6,7 @@ function ThumbnailTile(props: any) {
     const [conversionLink, setConversionLink] = useState(null);
     const [isConverting, setIsConverting] = useState(false);
 
-    const { data: ytdata = {}, success: ytdataSuccess = false} = props.tdata;
+    const { result: ytdata = {}, success: ytdataSuccess = false} = props.tdata;
 
     if ( ytdata === "" || !ytdataSuccess) {
         return(        
@@ -18,6 +18,8 @@ function ThumbnailTile(props: any) {
         );
     }
 
+
+    console.log("DATA", ytdata);
     const handleOptionChange = (event: { 
         target: { value: SetStateAction<string>; }; 
     }) => {
@@ -30,7 +32,7 @@ function ThumbnailTile(props: any) {
         if ( selectedOption !=="Format" && !isConverting) {
             setIsConverting(true);
 
-            const [format, quality] = selectedOption.split('-');
+            // const [itag] = selectedOption;
 
             // Make a POST API call here
             try {
@@ -41,8 +43,7 @@ function ThumbnailTile(props: any) {
                     },
                     body: JSON.stringify({
                         "url": ytdata.url,
-                        "format": format,
-                        "resolution": quality
+                        "itag": selectedOption
                     }),
                 });
 
@@ -65,11 +66,18 @@ function ThumbnailTile(props: any) {
         }
     };
 
-    const options = Object.entries(ytdata.resolutions || {}).flatMap(([format, qualities]) => (qualities as string[]).map((quality: string) => (
-        <option key={`${format}-${quality}`} value={`${format}-${quality}`}>
-            {`${format} - ${quality}`}
+    const options = Object.entries(ytdata["video/mp4"]).map(([quality, value]) => (
+        <option key={value} value={value}>
+          {quality}
         </option>
-    )));
+    ));
+
+
+    // const options = Object.entries(ytdata.resolutions || {}).flatMap(([format, qualities]) => (qualities as string[]).map((quality: string) => (
+    //     <option key={`${format}-${quality}`} value={`${format}-${quality}`}>
+    //         {`${format} - ${quality}`}
+    //     </option>
+    // )));
    
     return(        
         <form>
@@ -88,7 +96,7 @@ function ThumbnailTile(props: any) {
                     <div className="row">
                         <div className="col">
                             <select className="form-select" aria-label="Default select example" onChange={handleOptionChange} defaultValue="Format">
-                                <option key="Format" disabled>Format</option>                                
+                                <option key="Format" disabled>Resolution</option>                                
                                 {options}
                             </select>
                         
