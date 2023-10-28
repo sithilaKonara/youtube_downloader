@@ -44,7 +44,7 @@ jobs:
     #   run: deactivate
 
     - name: Zip Pytube
-      run: ls -al venv/lib/
+      run: ls -al venv/lib/python3.11/site-packages/pytube
 
 
 
