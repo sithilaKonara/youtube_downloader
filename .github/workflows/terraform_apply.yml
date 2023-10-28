@@ -40,8 +40,8 @@ jobs:
     - name: Install Pytube
       run: pip install pytube
 
-    # - name: Deactivate virtual environment
-    #   run: deactivate
+    - name: Deactivate virtual environment
+      run: deactivate
 
     - name: Zip Pytube
       run: ls -al venv/lib/python3.11/site-packages
