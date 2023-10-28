@@ -58,3 +58,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+backend\modules\api_backend\documents\lambda\pytube\layer-old
