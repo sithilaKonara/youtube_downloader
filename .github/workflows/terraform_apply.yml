@@ -36,13 +36,14 @@ jobs:
     
     - name: Install Pytube
       run: |
-        ls -al
         source venv/bin/activate
         pip install pytube
         deactivate
 
-    - name: Zip Pytube
-      run: ls -al venv/lib/python3.11/site-packages
+    - name: Copy lib files
+      run: |
+        cp -r venv/lib/python3.11/site-packages/* backend/modules/api_backend/documents/lambda/pytube/layer/python
+        ls -al backend/modules/api_backend/documents/lambda/pytube/layer/python
 
 
 
