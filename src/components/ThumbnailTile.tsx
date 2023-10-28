@@ -71,13 +71,6 @@ function ThumbnailTile(props: any) {
         </option>
     ));
 
-
-    // const options = Object.entries(ytdata.resolutions || {}).flatMap(([format, qualities]) => (qualities as string[]).map((quality: string) => (
-    //     <option key={`${format}-${quality}`} value={`${format}-${quality}`}>
-    //         {`${format} - ${quality}`}
-    //     </option>
-    // )));
-   
     return(        
         <form>
             <div className="input-group mb-3">

@@ -20,7 +20,7 @@ function Home() {
                 <div className="col-xxl">
                     <UrlSubmit onSubmit={handleUrlData}
                     />
-                    {thumbnailTileData !== null && <ThumbnailTile tdata={thumbnailTileData} />}
+                    {Object.keys(thumbnailTileData).length !== 0 && <ThumbnailTile tdata={thumbnailTileData} />}
                 </div>
                 <div className="col">
                    
