@@ -44,7 +44,7 @@ jobs:
     #   run: deactivate
 
     - name: Zip Pytube
-      run: ls -al venv/
+      run: ls -al venv/lib/
 
 
 
