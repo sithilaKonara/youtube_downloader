@@ -36,10 +36,11 @@ jobs:
     
     - name: Install Pytube
       run: |
+        ls -al
         source venv/bin/activate
         pip install pytube
         deactivate
-        
+
     - name: Zip Pytube
       run: ls -al venv/lib/python3.11/site-packages
 
