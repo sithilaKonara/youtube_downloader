@@ -46,8 +46,6 @@ jobs:
         ls -al backend/modules/api_backend/documents/lambda/pytube/layer/python
 
 
-
-
     # # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     # - name: Setup Terraform
     #   uses: hashicorp/setup-terraform@v1
