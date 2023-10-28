@@ -26,34 +26,57 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
+    - name: Set up Python
+      uses: actions/setup-python@v2
       with:
-        terraform_version: 1.6.1
-        terraform_wrapper: false
+        python-version: 3.11
 
-    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: Terraform Init
-      run: |
-        cd backend
-        terraform init
+    - name: Create virtual environment
+      run: python -m venv venv
+    
+    - name: Activate virtual environment
+      run: source venv/bin/activate
 
-    # Checks that all Terraform configuration files adhere to a canonical format
-    # - name: Terraform Format
+    - name: Install Pytube
+      run: pip install pytube
+
+    - name: Deactivate virtual environment
+      run: deactivate
+
+    - name: Zip Pytube
+      run: ls -al venv/lib/python*/site-packages/pytube
+
+
+
+
+    # # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    # - name: Setup Terraform
+    #   uses: hashicorp/setup-terraform@v1
+    #   with:
+    #     terraform_version: 1.6.1
+    #     terraform_wrapper: false
+
+    # # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    # - name: Terraform Init
     #   run: |
     #     cd backend
-    #     terraform fmt -check
+    #     terraform init
 
-    # Generates an execution plan for Terraform
-    - name: Terraform Plan
-      run: |
-        cd backend
-        terraform plan -input=false
+    # # Checks that all Terraform configuration files adhere to a canonical format
+    # # - name: Terraform Format
+    # #   run: |
+    # #     cd backend
+    # #     terraform fmt -check
 
-      # On push to "main", build or change infrastructure according to Terraform configuration files
-      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
-    - name: Terraform Apply
-      run: |
-        cd backend
-        terraform apply -auto-approve -input=false
+    # # Generates an execution plan for Terraform
+    # - name: Terraform Plan
+    #   run: |
+    #     cd backend
+    #     terraform plan -input=false
+
+    #   # On push to "main", build or change infrastructure according to Terraform configuration files
+    #   # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
+    # - name: Terraform Apply
+    #   run: |
+    #     cd backend
+    #     terraform apply -auto-approve -input=false
