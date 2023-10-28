@@ -44,7 +44,7 @@ jobs:
     #   run: deactivate
 
     - name: Zip Pytube
-      run: pwd
+      run: ls -al
 
 
 
