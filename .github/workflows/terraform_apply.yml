@@ -82,7 +82,8 @@ jobs:
     - name: Terraform Output
       run: |   
         cd backend     
-        terraform output o_api_endpoints > config.json
-        ls -al
-        cat config.json
+        terraform output o_api_endpoints > ../src/config.json
+        ls -al ../src/
+        cat ../src/config.json
+
   
