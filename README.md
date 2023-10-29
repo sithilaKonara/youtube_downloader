@@ -1,4 +1,4 @@
-<h1 align="center">Simple Youtube Downloder(AWS Serverless application) </h1>
+<h1 align="center">Simple Youtube Downloder(AWS Serverless) </h1>
 
 <h3 align="left">Overview</h3>
 YouTube Downloader is a sample web tool that lets you easily download YouTube videos. With this tool, you can save your favourite videos for offline viewing or extract audio for various purposes.
