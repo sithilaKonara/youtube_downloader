@@ -20,7 +20,7 @@ resource "aws_cloudfront_distribution" "r_ytd_web_cf" {
 
   enabled             = true
   is_ipv6_enabled     = true
-  comment             = "${v_web_backend_app_name} CloudFront destribution"
+  comment             = "${var.v_web_backend_app_name} CloudFront destribution"
   default_root_object = "index.html"
   price_class = "PriceClass_200"
 
