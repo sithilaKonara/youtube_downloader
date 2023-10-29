@@ -65,6 +65,7 @@ resource "aws_api_gateway_method_response" "r_get_ytd_response" {
       "method.response.header.Access-Control-Allow-Origin"      = true,
       "method.response.header.Access-Control-Allow-Credentials" = true
     }
+
 }
 
 resource "aws_api_gateway_method_response" "r_download_ytd_response" {
@@ -78,7 +79,7 @@ resource "aws_api_gateway_method_response" "r_download_ytd_response" {
     "method.response.header.Access-Control-Allow-Methods"     = true,
     "method.response.header.Access-Control-Allow-Origin"      = true,
     "method.response.header.Access-Control-Allow-Credentials" = true
-  }
+  }  
 }
 
 resource "aws_api_gateway_integration_response" "r_get_ytd_integration_response" {
@@ -93,6 +94,8 @@ resource "aws_api_gateway_integration_response" "r_get_ytd_integration_response"
     "method.response.header.Access-Control-Allow-Origin"      = "'*'",
     "method.response.header.Access-Control-Allow-Credentials" = "'true'"
   }
+
+    depends_on = [ aws_api_gateway_integration.r_get_ytd_lambda ]
 }
 
 resource "aws_api_gateway_integration_response" "r_download_ytd_integration_response" {
@@ -107,6 +110,8 @@ resource "aws_api_gateway_integration_response" "r_download_ytd_integration_resp
     "method.response.header.Access-Control-Allow-Origin"      = "'*'",
     "method.response.header.Access-Control-Allow-Credentials" = "'true'"
   }
+
+  depends_on = [ aws_api_gateway_integration.r_download_ytd_lambda ]
 }
 
 
@@ -194,6 +199,7 @@ resource "aws_api_gateway_integration_response" "r_get_ytd_integration_response_
     "method.response.header.Access-Control-Allow-Methods"     = "'GET,OPTIONS,POST,PUT'",
     "method.response.header.Access-Control-Allow-Origin"      = "'*'"
   }
+  depends_on = [ aws_api_gateway_integration.r_get_ytd_option ]
 }
 
 resource "aws_api_gateway_integration_response" "r_download_ytd_integration_response_option" {
@@ -207,6 +213,8 @@ resource "aws_api_gateway_integration_response" "r_download_ytd_integration_resp
     "method.response.header.Access-Control-Allow-Methods"     = "'GET,OPTIONS,POST,PUT'",
     "method.response.header.Access-Control-Allow-Origin"      = "'*'"
   }
+
+  depends_on = [ aws_api_gateway_integration.r_download_ytd_option ]
 }
 
 
@@ -219,7 +227,12 @@ resource "aws_api_gateway_integration_response" "r_download_ytd_integration_resp
 resource "aws_api_gateway_deployment" "r_ytd_api_gw_deployment" {  
   rest_api_id = aws_api_gateway_rest_api.r_ytd_api_gateway.id
   stage_name = "test"
-  # depends_on = [aws_api_gateway_integration.get_lambda, aws_api_gateway_integration.post_lambda]
+  depends_on = [
+    aws_api_gateway_integration.r_get_ytd_lambda,
+    aws_api_gateway_integration.r_download_ytd_lambda,
+    aws_api_gateway_integration.r_get_ytd_option,
+    aws_api_gateway_integration.r_download_ytd_option
+  ]
 }
 
 resource "aws_api_gateway_stage" "r_api_gw_stage" {
