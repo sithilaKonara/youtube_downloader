@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "r_ytd_web_s3" {
-  bucket = "youtube-downloader-web"
+  bucket = "${var.v_web_backend_app_name}-web"
 }
 
 # add bucket policy to let the CloudFront OAI get objects:

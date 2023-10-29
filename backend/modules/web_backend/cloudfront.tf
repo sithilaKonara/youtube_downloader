@@ -1,5 +1,5 @@
 resource "aws_cloudfront_origin_access_control" "r_ytd_web_cfoac" {
-  name                              = "example"
+  name                              = "${var.v_web_backend_app_name}-oac"
   description                       = "Example Policy"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
@@ -20,7 +20,7 @@ resource "aws_cloudfront_distribution" "r_ytd_web_cf" {
 
   enabled             = true
   is_ipv6_enabled     = true
-  comment             = "Testing CloudFront destribution"
+  comment             = "${v_web_backend_app_name} CloudFront destribution"
   default_root_object = "index.html"
   price_class = "PriceClass_200"
 

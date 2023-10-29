@@ -23,7 +23,7 @@ data "archive_file" "d_get_ytd_object" {
 resource "aws_lambda_function" "r_get_ytd_object" {
 
   filename      = "${path.root}/modules/api_backend/documents/lambda/get_ytd_object.zip"
-  function_name = "get_ytd_object"
+  function_name = "${var.v_api_backend_app_name}-get_ytd_object"
   role          = aws_iam_role.r_role_get_ytd_object.arn
   handler       = "get_ytd_object.get_ytd_object"
   timeout = 900
@@ -49,7 +49,7 @@ data "archive_file" "d_download_ytd_object" {
 resource "aws_lambda_function" "r_download_ytd_object" {
 
   filename      = "${path.root}/modules/api_backend/documents/lambda/download_ytd_object.zip"
-  function_name = "download_ytd_object"
+  function_name = "${var.v_api_backend_app_name}-download_ytd_object"
   role          = aws_iam_role.r_role_download_ytd_object.arn
   handler       = "download_ytd_object.download_ytd_object"
   timeout = 900

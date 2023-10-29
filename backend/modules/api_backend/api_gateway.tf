@@ -1,6 +1,6 @@
 
 resource "aws_api_gateway_rest_api" "r_ytd_api_gateway" {
-  name = "ytd_gateway"
+  name = "${var.v_api_backend_app_name}-api-gateway"
 }
 
 resource "aws_api_gateway_resource" "r_ytd_root" {
@@ -219,7 +219,7 @@ resource "aws_api_gateway_integration_response" "r_download_ytd_integration_resp
 resource "aws_api_gateway_deployment" "r_ytd_api_gw_deployment" {  
   rest_api_id = aws_api_gateway_rest_api.r_ytd_api_gateway.id
   stage_name = "test"
-#   depends_on = [aws_api_gateway_integration.get_lambda, aws_api_gateway_integration.post_lambda]
+  # depends_on = [aws_api_gateway_integration.get_lambda, aws_api_gateway_integration.post_lambda]
 }
 
 resource "aws_api_gateway_stage" "r_api_gw_stage" {
@@ -251,8 +251,4 @@ resource "aws_lambda_permission" "r_api_gateway_download_ytd" {
     aws_api_gateway_integration.r_download_ytd_lambda,
     aws_api_gateway_stage.r_api_gw_stage
   ]
-}
-
-output "o_api_gateway_url" {
-  value = aws_api_gateway_deployment.r_ytd_api_gw_deployment.invoke_url
 }
