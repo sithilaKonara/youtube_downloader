@@ -1,7 +1,3 @@
-locals {
-  app_name = "youtube-downloader"
-}
-
 #Get account ID
 data "aws_caller_identity" "current" {}
 
@@ -10,12 +6,12 @@ data "aws_region" "current" {}
 
 module "web_backend"{
   source = "./modules/web_backend"
-  v_web_backend_app_name = local.app_name
+  v_web_backend_app_name = var.app_name
 }
 
 module "api_backend"{
   source = "./modules/api_backend"
-  v_api_backend_app_name = local.app_name
+  v_api_backend_app_name = var.app_name
   v_backend_account_id = data.aws_caller_identity.current.account_id
   v_backend_region_id = data.aws_region.current.name
   v_backend_cloudfront_distribution_url = module.web_backend.o_cloudfront_distribution_url
