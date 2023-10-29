@@ -1,11 +1,10 @@
-import { useState } from 'react';
-
-
+import { useState, useEffect } from 'react';
 
 function UrlSubmit(props: any) {
 
     const [url, setUrl] = useState('');
     const [urlData, setUrlData] = useState('');
+    const [apiEndpoint, setApiEndpoint] = useState('');
 
     const handleInputChange = (event:any) => {
         setUrl(event.target.value);
@@ -13,7 +12,7 @@ function UrlSubmit(props: any) {
 
     const handleSubmit = async () => {
         try{                        
-            const response = await fetch('https://ia29poyu60.execute-api.us-east-1.amazonaws.com/test/ytd/ytd_get', {
+            const response = await fetch(apiEndpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -39,7 +38,14 @@ function UrlSubmit(props: any) {
         } catch(error) {
             console.error('API Error:', error);
         }       
-    }       
+    }
+    
+    useEffect(() => {
+        fetch('../config.json') // Replace with the actual path to your JSON file
+          .then((response) => response.json())
+          .then((data) => setApiEndpoint(data.get_endpoint))
+          .catch((error) => console.error('Error fetching config:', error));
+      }, []);
 
     return(
         <form>
