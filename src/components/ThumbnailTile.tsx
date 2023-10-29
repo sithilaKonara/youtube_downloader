@@ -1,11 +1,10 @@
-import { SetStateAction, useState, useEffect } from 'react';
+import { SetStateAction, useState } from 'react';
 
 function ThumbnailTile(props: any) {
 
     const [selectedOption, setSelectedOption] = useState("Format");
     const [conversionLink, setConversionLink] = useState(null);
     const [isConverting, setIsConverting] = useState(false);
-    const [apiEndpoint, setApiEndpoint] = useState('');
 
     const { result: ytdata = {}, success: ytdataSuccess = false} = props.tdata;
 
@@ -35,7 +34,7 @@ function ThumbnailTile(props: any) {
 
             // Make a POST API call here
             try {
-                const response = await fetch(apiEndpoint, {
+                const response = await fetch("https://8rm28zgyce.execute-api.us-east-1.amazonaws.com/test/ytd/ytd_download", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -71,13 +70,6 @@ function ThumbnailTile(props: any) {
           {quality}
         </option>
     ));
-
-    useEffect(() => {
-        fetch('../config.json') // Replace with the actual path to your JSON file
-          .then((response) => response.json())
-          .then((data) => setApiEndpoint(data.download_endpoint))
-          .catch((error) => console.error('Error fetching config:', error));
-      }, []);
 
     return(        
         <form>
