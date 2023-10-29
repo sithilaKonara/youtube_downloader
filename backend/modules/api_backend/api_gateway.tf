@@ -226,7 +226,7 @@ resource "aws_api_gateway_integration_response" "r_download_ytd_integration_resp
 
 resource "aws_api_gateway_deployment" "r_ytd_api_gw_deployment" {  
   rest_api_id = aws_api_gateway_rest_api.r_ytd_api_gateway.id
-  stage_name = "testenv"
+  stage_name = "test"
   depends_on = [
     aws_api_gateway_integration.r_get_ytd_lambda,
     aws_api_gateway_integration.r_download_ytd_lambda,
