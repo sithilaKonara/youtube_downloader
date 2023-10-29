@@ -80,7 +80,8 @@ jobs:
     
       # Create configuration file   
     - name: Terraform Output
-      run: |        
+      run: |   
+        cd backend     
         terraform output o_api_endpoints > config.json
         ls -al
         cat config.json
